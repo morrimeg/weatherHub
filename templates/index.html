@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Megan's Microburst</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Megan's Microburst</h1>
+    <p style="text-align: center;">Bringing You a Burst of Weather Insights!</p>
+
+    <form method="POST">
+        <input type="text" name="lat" placeholder="Latitude" value="{{ lat }}" required>
+        <input type="text" name="lon" placeholder="Longitude" value="{{ lon }}" required>
+        <input type="submit" value="Get Weather">
+    </form>
+
+    <div class="tiles">
+        {% if forecast %}
+            <div class="tile">
+                <h2>NWS Forecast</h2>
+                {% for period in forecast[:5] %}
+                    <div class="forecast-period">
+                        <strong>{{ period.name }}</strong><br>
+                        {{ period.detailedForecast }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="tile">
+            <a href="https://www.spc.noaa.gov/products/outlook/day1otlk.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <h2>SPC Day 1 Outlook</h2>
+                <img src="https://www.spc.noaa.gov/products/outlook/day1otlk_1300.gif" alt="SPC Day 1 Outlook">
+            </a>
+        </div>
+
+        <div class="tile">
+            <a href="https://www.spc.noaa.gov/products/outlook/day2otlk.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <h2>SPC Day 2 Outlook</h2>
+                <img src="https://www.spc.noaa.gov/products/outlook/day2otlk_0600.gif" alt="SPC Day 2 Outlook">
+            </a>
+        </div>
+
+        <div class="tile">
+            <a href="https://www.spc.noaa.gov/products/outlook/day3otlk.html" target="_blank" style="text-decoration: none; color: inherit; display: block;">
+                <h2>SPC Day 3 Outlook</h2>
+                <img src="https://www.spc.noaa.gov/products/outlook/day3otlk_0730.gif" alt="SPC Day 3 Outlook">
+            </a>
+        </div>
+    </div>
+</body>
+</html>
